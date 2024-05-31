@@ -1,0 +1,64 @@
+<SupermercadoScreenManager>:
+    pro: pro
+    codigo: codigo
+    costo: costo
+    busqueda: busqueda
+    producto: ""
+    precio: ""
+
+    Screen:
+        name: 'ingreso'
+        canvas:
+            Color:
+                rgba: 109/255., 8/255., 57/255., 1
+            Rectangle:
+                pos: self.pos
+                size: self.size  
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'SUPERMERCADO IC NORTE'
+            GridLayout:
+                cols: 2
+                Label:
+                    text: 'PRODUCTO'
+                TextInput:
+                    id: pro
+                Label:
+                    text: 'CODIGO DE BARRA'
+                TextInput:
+                    id: codigo
+                Label:
+                    text: 'PRECIO'
+                TextInput:
+                    id: costo
+            Button:
+                text: 'GUARDAR'
+                on_release: 
+                    root.current = 'buscar'
+                    root.save()
+
+    Screen:
+        name: 'buscar'
+        canvas:
+            Color:
+                rgba: 0, 1, 0, .5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        GridLayout:
+            cols: 2  
+            Button:
+                text: 'Ingrese Código y luego presione para buscar'
+                on_press: root.buscando()
+            TextInput:    
+                id: busqueda
+            TextInput:
+                text: root.producto
+                readonly: True
+            TextInput:                    
+                text: root.precio
+                readonly: True
+            Button:
+                text: 'Agregar Más Producto'
+                on_press: root.current = 'ingreso'
